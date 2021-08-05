@@ -13,7 +13,7 @@ body {
     grid-template-columns: repeat(3, 10vw);
 }
 .game-container > button {
-    font-size: 4rem;
+    font-size: 8vw;
     border: 1px solid silver;
     outline: none;
     background-color: white;
