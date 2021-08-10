@@ -1,18 +1,21 @@
-let gameBoard = [];
+const gameBoard = [];
 
 const gameContainer = document.querySelector('[data-container]');
+const informationWindow = document.querySelector('[data-info-window]')
 
-let type = '';
+const Player = (sign, turn) => {
+    const getSign = () => sign;
+    const getTurn = () => turn;
+    return {sign, turn}
+};
 
-playGame = () => {
-    if (type === 'x' || type === '') {
-        type = 'o';
-    } else {
-        type = 'x';
-    }
-}
+let playerOne = Player('x', true);
+let playerTwo = Player('o', false);
+
+let count = 0;
 
 displayGame = () => {
+    
     gameContainer.querySelectorAll('[data-box]').forEach(box => box.remove())
     for (let i = 0; i < 9; i++) {
         const game = document.createElement('button');
@@ -21,23 +24,41 @@ displayGame = () => {
         gameContainer.appendChild(game);
     
         game.addEventListener('click', () => {
-            playGame()
+            count += 1
             if (gameBoard[i] === 'x' || gameBoard[i] === 'o') {
                 return;
+            } else if (count % 2 === 1) {
+                gameBoard[i] = playerOne.sign;
             } else {
-                gameBoard[i] = type;
+                gameBoard[i] = playerTwo.sign;
             }
-            displayGame()
+            displayGame();
+            checkGame();
         })
     }
 };
 
+checkGame = () => {
+    let currentPlayer = playerOne.turn ? playerOne : playerTwo;
+
+    const winningSpots = [
+        [0,1,2],
+        [3,4,5],
+        [6,7,8],
+        [0,3,6],
+        [1,4,7],
+        [2,5,8],
+        [0,4,8],
+        [2,4,6], 
+    ];
+
+    winningSpots.forEach(array => {
+        if(gameBoard[array[0]] === currentPlayer.sign && gameBoard[array[1]] === currentPlayer.sign && gameBoard[array[2]] === currentPlayer.sign) {
+            informationWindow.textContent=`${currentPlayer.sign} wins`;
+        }
+    });
+
+    let draw = gameBoard.every(sign => sign !== "");
+}
+
 displayGame()
-
-function displayController() {
-
-}
-
-function players() {
-
-}
