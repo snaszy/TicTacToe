@@ -1,9 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito&family=Nunito+Sans&display=swap');
 *, *::before, *::after {
     box-sizing: border-box;
-    font-family:Arial, Helvetica, sans-serif;
+    font-family: 'Nunito Sans', Arial, Helvetica, sans-serif;
 }
 body {
     background-color: silver;
+    margin: 0;
+    padding: 0;
+}
+nav {
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    padding: 10px 10px 10px 0px;
+    background-color: rgb(128, 128, 128);
+}
+#name {
+    font-size: 30px;
+}
+ul li {
+    display: inline-block;
+    padding: 0px 20px;
+}
+a {
+    color: white;
+    text-decoration: none;
+}
+.title-container {
+    text-align: center;
+    font-size: 30px;
+}
+h1 {
+    font-family: 'Nunito Sans', Arial, Helvetica, sans-serif;
+    color: rgb(170, 255, 0);
 }
 .game-container {
     display: grid;
@@ -14,7 +44,13 @@ body {
 }
 .game-container > button {
     font-size: 8vw;
-    border: 1px solid silver;
+    border: 2px solid silver;
     outline: none;
     background-color: white;
+    line-height: 1em;
+}
+.game-container > button:hover {
+    background-color: rgb(170, 255, 0);
+    transform: scale(1.05);
+    color: white;
 }
