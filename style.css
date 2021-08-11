@@ -17,7 +17,7 @@ nav {
     background-color: rgb(128, 128, 128);
 }
 #name {
-    font-size: 30px;
+    font-size: 5vw;
 }
 ul li {
     display: inline-block;
@@ -29,11 +29,14 @@ a {
 }
 .title-container {
     text-align: center;
-    font-size: 30px;
+    font-size: 5vw;
 }
 h1 {
     font-family: 'Nunito Sans', Arial, Helvetica, sans-serif;
-    color: rgb(170, 255, 0);
+    color: rgb(37, 37, 37);
+}
+h2 {
+    text-align: center;
 }
 .game-container {
     display: grid;
@@ -52,5 +55,14 @@ h1 {
 .game-container > button:hover {
     background-color: rgb(170, 255, 0);
     transform: scale(1.05);
+    color: white;
+}
+.reset-button {
+    border: none;
+    color: rgb(128, 128, 128);
+}
+.reset-button:hover {
+    border: none;
+    background-color: rgb(37, 37, 37);
     color: white;
 }

@@ -1,7 +1,8 @@
-const gameBoard = [];
+let gameBoard = [];
 
 const gameContainer = document.querySelector('[data-container]');
-const informationWindow = document.querySelector('[data-info-window]')
+const informationWindow = document.querySelector('[data-info-window]');
+const resetButton = document.querySelector('[data-reset]');
 
 const Player = (sign, turn) => {
     const getSign = () => sign;
@@ -14,6 +15,9 @@ let playerTwo = Player('o', false);
 
 let count = 0;
 
+let gameOver = false;
+let tieGame = false;
+
 displayGame = () => {
     
     gameContainer.querySelectorAll('[data-box]').forEach(box => box.remove())
@@ -25,7 +29,9 @@ displayGame = () => {
     
         game.addEventListener('click', () => {
             count += 1
-            if (gameBoard[i] === 'x' || gameBoard[i] === 'o') {
+            if (gameOver) {
+                return;
+            } else if (gameBoard[i] === 'x' || gameBoard[i] === 'o') {
                 return;
             } else if (count % 2 === 1) {
                 gameBoard[i] = playerOne.sign;
@@ -41,7 +47,7 @@ displayGame = () => {
 checkGame = () => {
     let currentPlayer = playerOne.turn ? playerOne : playerTwo;
 
-    const winningSpots = [
+    const winningArray = [
         [0,1,2],
         [3,4,5],
         [6,7,8],
@@ -52,13 +58,34 @@ checkGame = () => {
         [2,4,6], 
     ];
 
-    winningSpots.forEach(array => {
+    winningArray.forEach(array => {
         if(gameBoard[array[0]] === currentPlayer.sign && gameBoard[array[1]] === currentPlayer.sign && gameBoard[array[2]] === currentPlayer.sign) {
             informationWindow.textContent=`${currentPlayer.sign} wins`;
+            gameOver = true;
+        } else if (count === 9 && gameOver === false){
+            informationWindow.textContent=`tie`;
         }
     });
 
-    let draw = gameBoard.every(sign => sign !== "");
+    if (count % 2 === 1) {
+        playerOne.turn = false;
+        playerTwo.turn = true;
+    } else {
+        playerOne.turn = true;
+        playerTwo.turn = false;
+    } 
+}
+
+resetGame = () => {
+    gameBoard = ['','','','','','','','',''];
+    gameOver = false;
+    playerOne.turn = true;
+    playerTwo.turn = false;
 }
 
 displayGame()
+
+resetButton.addEventListener('click', () => {
+    resetGame();
+    displayGame();
+})
